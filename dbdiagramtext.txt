@@ -1,0 +1,35 @@
+Table "cart" {
+  "product" varchar(40) [not null]
+  "user" varchar(40) [not null]
+  "iduser" varchar(20) [not null]
+}
+
+Table "categories" {
+  "product" varchar(40) [not null]
+  "category" varchar(20) [pk, not null]
+}
+
+Table "orders" {
+  "ordercode" varchar(40) [pk, not null]
+  "userid" varchar(20) [not null]
+  "products" varchar(40) [not null]
+  "quantity" int(11) [not null]
+}
+
+Table "products" {
+  "productid" varchar(20) [pk, not null]
+  "product" varchar(40) [not null]
+  "category" varchar(40) [not null]
+}
+
+Table "users" {
+  "name" varchar(40) [not null]
+  "numberphone" int(11) [not null]
+  "id" varchar(20) [pk, not null]
+  "Type" varchar(40) [not null]
+}
+
+Ref:"categories"."category" < "products"."category"
+Ref:"products"."productid" > "orders"."products"
+Ref:"users"."id" < "orders"."userid"
+Ref:"orders"."ordercode" < "cart"."product"
